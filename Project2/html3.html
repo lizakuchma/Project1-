@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Contact Us Form</title>
+<h2>Contact Us</h2>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  form {
+    max-width: 450px;
+  }
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+  input, textarea, select {
+    width: 100%;
+    padding: 6px;
+    margin-top: 4px;
+    box-sizing: border-box;
+  }
+  textarea {
+    resize: vertical;
+  }
+  
+  fieldset {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-top: 12px;
+  }
+  legend {
+    font-weight: bold;
+    padding: 0 6px;
+  }
+  .radio-group {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .radio-group label {
+    display: inline-block;
+    margin: 0;
+  }
+  button {
+    margin-top: 15px;
+    padding: 8px 15px;
+    border: none;
+    background: #4CAF50;
+    color: white;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #45a049;
+  }
+</style>
+</head>
+<body>
+
+<form method="post" action="#">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required 
+         pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+         title="Enter a valid email address">
+
+  <label for="phone">Phone Number:</label>
+  <input type="tel" id="phone" name="phone" required 
+         pattern="[0-9]{10}" title="Phone number must be 10 digits">
+
+  <label for="message">Message:</label>
+  <textarea id="message" name="message" rows="4" required></textarea>
+
+  <fieldset>
+    <legend>Preferred Contact Method:</legend>
+    <div class="radio-group">
+      <label><input type="radio" name="contactMethod" value="Email" required> Email</label>
+      <label><input type="radio" name="contactMethod" value="Phone"> Phone</label>
+      <label><input type="radio" name="contactMethod" value="Both"> Both</label>
+    </div>
+  </fieldset>
+
+  <label for="inquiry">Inquiry Type:</label>
+  <select id="inquiry" name="inquiry" required>
+    <option value="">Select an option</option>
+    <option value="general">General Inquiry</option>
+    <option value="support">Support Request</option>
+    <option value="feedback">Feedback</option>
+  </select>
+
+  <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

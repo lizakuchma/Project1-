@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .input-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    #new-task {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #add-task {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #add-task:hover {
+      background-color: #218838;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .completed span {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    button {
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .edit-btn {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .remove-btn {
+      background-color: #dc3545;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>To-Do List</h1>
+    <div class="input-container">
+      <input type="text" id="new-task" placeholder="Enter new task">
+      <button id="add-task">Add Task</button>
+    </div>
+    <ul id="task-list"></ul>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const taskInput = document.getElementById('new-task');
+      const addTaskBtn = document.getElementById('add-task');
+      const taskList = document.getElementById('task-list');
+
+      addTaskBtn.addEventListener('click', () => {
+        const taskText = taskInput.value.trim();
+        if (taskText === '') {
+          alert('Please enter a task!');
+          return;
+        }
+        addTask(taskText);
+        taskInput.value = '';
+      });
+
+      taskList.addEventListener('click', (e) => {
+        if (e.target.classList.contains('remove-btn')) {
+          e.target.parentElement.remove();
+        }
+
+        if (e.target.classList.contains('edit-btn')) {
+          const li = e.target.parentElement;
+          const span = li.querySelector('span');
+          const newText = prompt('Edit task:', span.textContent);
+          if (newText !== null && newText.trim() !== '') {
+            span.textContent = newText;
+          }
+        }
+
+        if (e.target.type === 'checkbox') {
+          const li = e.target.parentElement;
+          li.classList.toggle('completed', e.target.checked);
+        }
+      });
+
+     
+      function addTask(taskText) {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <input type="checkbox">
+          <span>${taskText}</span>
+          <button class="edit-btn">Edit</button>
+          <button class="remove-btn">Remove</button>
+        `;
+        taskList.appendChild(li);
+      }
+    });
+  </script>
+</body>
+</html>
